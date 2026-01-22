@@ -12,7 +12,7 @@ class LogLevelWrapper {
 	std::string_view to_string();
 	std::string_view to_color();
 
-private:
+  private:
 	LogLevel level_;
 };
 

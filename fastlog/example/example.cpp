@@ -7,14 +7,14 @@ namespace fastlog::test {
 std::vector<int> vec = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 void			 file_log_func1() {
 	long long count = 0;
-	while(count < 1000) {
+	while(count < 10000) {
 		fastlog::file::get_logger("file_log1")->info("hello world log1,count : {}, vec :{}", count++, vec[count % 10]);
 	}
 }
 
 void file_log_func2() {
 	long long count = 0;
-	while(count < 1000) {
+	while(count < 10000) {
 		fastlog::file::get_logger("file_log2")->info("hello world log2,count : {}, vec :{}", count++, vec[count % 10]);
 	}
 }
@@ -45,7 +45,7 @@ void console_log_test() {
 	fastlog::console.fatal("hello world");
 }
 
-void test(){
+void test() {
 	console_log_test();
 	fastlog::console.info("file log write start .............");
 	file_log_test();
@@ -53,7 +53,7 @@ void test(){
 }
 }  // namespace fastlog::test
 
-int main(){
+int main() {
 	fastlog::test::test();
 	return 0;
 }

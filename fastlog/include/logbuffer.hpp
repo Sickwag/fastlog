@@ -4,7 +4,6 @@
 #include <cassert>
 #include <string>
 
-
 namespace fastlog::detail {
 template <size_t SIZE>
 class FileLogBuffer {

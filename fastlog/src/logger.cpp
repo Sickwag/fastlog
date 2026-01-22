@@ -10,7 +10,7 @@ fastlog::detail::FileLogger::FileLogger(fs::path log_file_path)
 fastlog::detail::FileLogger::~FileLogger() {
 	running_ = false;
 	cv_.notify_one();
-	if(work_thread_.joinable()){
+	if(work_thread_.joinable()) {
 		work_thread_.join();
 	}
 }
@@ -26,22 +26,16 @@ void fastlog::detail::FileLogger::work() {
 		}
 		for(auto& buffer : full_buffers_) {
 			log_fs_.write(buffer->data(), buffer->size());
-			buffer.reset();
+			buffer->reset();
 		}
 
 		// extra protection
-		if(full_buffers_.size() > 2){
+		if(full_buffers_.size() > 2) {
 			full_buffers_.resize(2);
 		}
-		if(!running_ && !current_buffer_->empty()){
-			// Move current buffer to full_buffers_ to be processed
-			full_buffers_.push_back(std::move(current_buffer_));
-			if(!empty_buffers_.empty()) {
-				current_buffer_ = std::move(empty_buffers_.front());
-				empty_buffers_.pop_front();
-			} else {
-				current_buffer_ = std::make_unique<FileLogBuf>();
-			}
+		if(!running_ && !current_buffer_->empty()) {
+			log_fs_.write(current_buffer_->data(), current_buffer_->size());
+			log_fs_.flush();
 		}
 		log_fs_.flush();
 		empty_buffers_.splice(empty_buffers_.end(), full_buffers_);

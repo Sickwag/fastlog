@@ -117,14 +117,14 @@ class ConsoleLogger : public BaseLogger<ConsoleLogger> {
 		// 		   record.line,
 		// 		   record.log);
 		std::string output = std::format("{} [{}{}{}] {} {}:{} {}\n",
-									   record.datetime,
-									   level_wrapper.to_color(),
-									   level_wrapper.to_string(),
-									   reset_format(),
-									   record.thread_id,
-									   record.file_name,
-									   record.line,
-									   record.log);
+										 record.datetime,
+										 level_wrapper.to_color(),
+										 level_wrapper.to_string(),
+										 reset_format(),
+										 record.thread_id,
+										 record.file_name,
+										 record.line,
+										 record.log);
 		std::cout << output;
 	}
 };

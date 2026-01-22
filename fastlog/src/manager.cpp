@@ -1,8 +1,8 @@
 #include "manager.hpp"
 #include <memory>
 
-fastlog::detail::FileLogger&
-fastlog::detail::FileLoggerManager::make_logger(const std::string& loggername, fs::path filepath) {
+fastlog::detail::FileLogger& fastlog::detail::FileLoggerManager::make_logger(const std::string& loggername,
+																			 fs::path			filepath) {
 	auto [it, inserted] = loggers_.try_emplace(loggername, filepath);
 	if(inserted) {
 		return it->second;

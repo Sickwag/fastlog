@@ -12,9 +12,9 @@ class logfstream {
 	~logfstream();
 	void flush();
 	void set_maxsize(std::size_t maxsize);
-	void write(const char *content, std::size_t size);
+	void write(const char* content, std::size_t size);
 
-private:
+  private:
 	void create_log();
 
 	static inline constexpr std::size_t BUFFER_SIZE = 1024;

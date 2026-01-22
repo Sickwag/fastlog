@@ -1,7 +1,8 @@
 #include "loglevel.hpp"
 #include <utility>
 
-fastlog::detail::LogLevelWrapper::LogLevelWrapper(LogLevel level) : level_(level) {}
+fastlog::detail::LogLevelWrapper::LogLevelWrapper(LogLevel level)
+	: level_(level) {}
 
 std::string_view fastlog::detail::LogLevelWrapper::to_string() {
 	switch(level_) {
@@ -43,7 +44,6 @@ std::string_view fastlog::detail::LogLevelWrapper::to_color() {
 	}
 }
 
-std::string_view fastlog::detail::reset_format()
-{
+std::string_view fastlog::detail::reset_format() {
 	return "\033[0m";
 }

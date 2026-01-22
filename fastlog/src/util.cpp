@@ -3,7 +3,6 @@
 #include <chrono>
 #include <ctime>
 
-
 std::optional<std::string> fastlog::detail::util::get_current_time_tostring(bool is_repeat) {
 	static thread_local std::array<char, 64> buf{};
 	static thread_local std::chrono::seconds last_second{ 0 };
