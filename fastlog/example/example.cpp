@@ -8,14 +8,16 @@ std::vector<int> vec = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 void			 file_log_func1() {
 	long long count = 0;
 	while(count < 10000) {
-		fastlog::file::get_logger("file_log1")->info("hello world log1,count : {}, vec :{}", count++, vec[count % 10]);
+		fastlog::file::get_logger("file_log1")
+			->info("hello world log1,count : {}, vec :{}", count++, vec[count % 10]);
 	}
 }
 
 void file_log_func2() {
 	long long count = 0;
 	while(count < 10000) {
-		fastlog::file::get_logger("file_log2")->info("hello world log2,count : {}, vec :{}", count++, vec[count % 10]);
+		fastlog::file::get_logger("file_log2")
+			->info("hello world log2,count : {}, vec :{}", count++, vec[count % 10]);
 	}
 }
 

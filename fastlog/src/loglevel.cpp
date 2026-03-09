@@ -44,6 +44,4 @@ std::string_view fastlog::detail::LogLevelWrapper::to_color() {
 	}
 }
 
-std::string_view fastlog::detail::reset_format() {
-	return "\033[0m";
-}
+std::string_view fastlog::detail::reset_format() { return "\033[0m"; }

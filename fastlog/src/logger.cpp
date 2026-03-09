@@ -19,7 +19,8 @@ void fastlog::detail::FileLogger::work() {
 	constexpr std::size_t max_buffer_list_size = 15;
 	while(running_) {
 		std::unique_lock<std::mutex> lock(mutex_);
-		cv_.wait_for(lock, std::chrono::milliseconds(3), [this]() -> bool { return !this->full_buffers_.empty(); });
+		cv_.wait_for(
+			lock, std::chrono::milliseconds(3), [this]() -> bool { return !this->full_buffers_.empty(); });
 		if(full_buffers_.size() > max_buffer_list_size) {
 			std::cerr << std::format("drop log messages {} larger buffers\n", full_buffers_.size() - 2);
 			full_buffers_.resize(2);

@@ -27,7 +27,8 @@ template <typename... Args>
 struct basic_format_string_wrapper {
 	template <typename T>
 		requires std::convertible_to<T, std::string_view>
-	consteval basic_format_string_wrapper(const T& s, std::source_location loc = std::source_location::current())
+	consteval basic_format_string_wrapper(const T&			   s,
+										  std::source_location loc = std::source_location::current())
 		: fmt_(s)
 		, loc_(loc) {}
 
@@ -41,13 +42,9 @@ using format_string_wrapper = basic_format_string_wrapper<std::type_identity_t<A
 template <typename DerviceLogger>
 class BaseLogger : util::noncopyable {
   public:
-	void set_level(LogLevel level) {
-		level_ = level;
-	};
+	void set_level(LogLevel level) { level_ = level; };
 
-	[[nodiscard]] LogLevel level() const {
-		return level_;
-	};
+	[[nodiscard]] LogLevel level() const { return level_; };
 
 	template <typename... Args>
 	void trace(format_string_wrapper<Args...> fmt, Args&&... args) {

@@ -3,9 +3,7 @@
 
 namespace fs = std::filesystem;
 
-void fastlog::set_console_log_level(LogLevel level) {
-	console.set_level(level);
-}
+void fastlog::set_console_log_level(LogLevel level) { console.set_level(level); }
 
 fastlog::detail::FileLogger& fastlog::file::make_logger(const std::string&	  logger_name,
 														std::filesystem::path log_path) {

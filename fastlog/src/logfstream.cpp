@@ -18,17 +18,11 @@ fastlog::detail::logfstream::logfstream(fs::path log_file)
 	file_stream_.rdbuf()->pubsetbuf(buffer_.data(), buffer_.size());
 }
 
-fastlog::detail::logfstream::~logfstream() {
-	file_stream_.close();
-}
+fastlog::detail::logfstream::~logfstream() { file_stream_.close(); }
 
-void fastlog::detail::logfstream::flush() {
-	file_stream_.flush();
-}
+void fastlog::detail::logfstream::flush() { file_stream_.flush(); }
 
-void fastlog::detail::logfstream::set_maxsize(std::size_t maxsize) {
-	this->file_maxsize_ = maxsize;
-}
+void fastlog::detail::logfstream::set_maxsize(std::size_t maxsize) { this->file_maxsize_ = maxsize; }
 
 void fastlog::detail::logfstream::write(const char* data, std::size_t size) {
 	file_stream_.write(data, size);
