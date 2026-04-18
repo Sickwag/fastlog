@@ -1,6 +1,9 @@
 ﻿#include "fastlog.hpp"
+#include <filesystem>
 #include <iostream>
 #include <vector>
+
+namespace fs = std::filesystem;
 
 namespace fastlog::test {
 
@@ -26,11 +29,12 @@ void file_log_test() {
 	const auto& file_logger1 = fastlog::file::make_logger("file_log1", FILE_LOG_PATH1);
 	const auto& file_logger2 = fastlog::file::make_logger("file_log2", FILE_LOG_PATH2);
 #else
-	std::cout << "test log file output to custom log path\n";
-	constexpr char* log_file_path1 = "D:/Code Files/vsstudio/FastLogLearning/logs/log1/";
-	constexpr char* log_file_path2 = "D:/Code Files/vsstudio/FastLogLearning/logs/log2/";
-	const auto&		file_logger1   = fastlog::file::make_logger("file_log1", log_file_path1);
-	const auto&		file_logger2   = fastlog::file::make_logger("file_log2", log_file_path2);
+	std::cout << "test log file output to current workpath\n";
+	fs::path	work_path	   = fs::current_path();
+	fs::path	log_file_path1 = work_path / "file_log1";
+	fs::path	log_file_path2 = work_path / "file_log2";
+	const auto& file_logger1   = fastlog::file::make_logger("file_log1", log_file_path1);
+	const auto& file_logger2   = fastlog::file::make_logger("file_log2", log_file_path2);
 #endif
 	std::thread t1(file_log_func1);
 	std::thread t2(file_log_func2);
