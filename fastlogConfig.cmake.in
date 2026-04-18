@@ -1,0 +1,27 @@
+@PACKAGE_INIT@
+
+# Include the targets file
+include("${CMAKE_CURRENT_LIST_DIR}/fastlogTargets.cmake")
+
+# Check for required dependencies
+# (Add any dependency checks here if needed)
+
+# Provide variables for include directories
+set(fastlog_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set(fastlog_LIBRARIES fastlog::fastlog)
+
+# Create imported targets if needed (already done by fastlogTargets.cmake)
+
+# Provide find_package helpers
+macro(fastlog_required_components)
+    # This macro can be used to check for required components
+    # Currently no components are defined
+endmacro()
+
+# Export variables for backward compatibility
+set(FASTLOG_FOUND TRUE)
+set(FASTLOG_INCLUDE_DIRS ${fastlog_INCLUDE_DIRS})
+set(FASTLOG_LIBRARIES ${fastlog_LIBRARIES})
+
+# Log message
+message(STATUS "Found fastlog: @PACKAGE_INSTALL_PREFIX@")

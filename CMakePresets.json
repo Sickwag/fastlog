@@ -1,23 +1,27 @@
 ﻿{
-	"version": 8,
+	"version": 6,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 25,
+		"patch": 0
+	},
 	"configurePresets": [
 		{
 			"name": "base",
 			"hidden": true,
-			"displayName": "GCC x86_64-linux-gnu",
-			"description": "使用编译器：C = /usr/bin/gcc, CXX = /usr/bin/g++",
 			"binaryDir": "${sourceDir}/out/build/${presetName}",
+			"installDir": "${sourceDir}/out/install/${presetName}",
+			"toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
 			"cacheVariables": {
-				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-				"CMAKE_C_COMPILER": "/usr/bin/gcc",
-				"CMAKE_CXX_COMPILER": "/usr/bin/g++",
-				"CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+				"CMAKE_CXX_STANDARD": "20",
+				"CMAKE_CXX_STANDARD_REQUIRED": true,
+				"CMAKE_EXPORT_COMPILE_COMMANDS": true
 			}
 		},
 		{
 			"name": "debug",
 			"displayName": "Debug",
-			"description": "Debug 构建，包含调试符号",
+			"description": "Debug build",
 			"inherits": "base",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Debug",
@@ -27,50 +31,74 @@
 		{
 			"name": "release",
 			"displayName": "Release",
-			"description": "O3 optimize release",
+			"description": "Release build",
 			"inherits": "base",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Release",
-				"CMAKE_CXX_FLAGS": "-O3 -DNDEBUG"
-			}
-		},
-		{
-			"name": "relwithdebinfo",
-			"displayName": "RelWithDebInfo",
-			"description": "O2 release with debug info",
-			"inherits": "base",
-			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "RelWithDebInfo",
-				"CMAKE_CXX_FLAGS": "-O2 -g"
+				"CMAKE_CXX_FLAGS": "-O3"
 			}
 		}
 	],
 	"buildPresets": [
 		{
 			"name": "debug",
+			"displayName": "Debug Build",
 			"configurePreset": "debug"
 		},
 		{
 			"name": "release",
+			"displayName": "Release Build",
 			"configurePreset": "release"
-		},
-		{
-			"name": "relwithdebinfo",
-			"configurePreset": "relwithdebinfo"
 		}
 	],
 	"testPresets": [
 		{
+			"name": "base-test",
+			"hidden": true,
+			"output": {
+				"outputOnFailure": true,
+				"verbosity": "default"
+			},
+			"execution": {
+				"noTestsAction": "error",
+				"stopOnFailure": false
+			}
+		},
+		{
 			"name": "debug",
+			"displayName": "Debug Test",
+			"description": "Run tests with Debug build",
+			"inherits": "base-test",
 			"configurePreset": "debug"
 		},
 		{
 			"name": "release",
+			"displayName": "Release Test",
+			"description": "Run tests with Release build",
+			"inherits": "base-test",
 			"configurePreset": "release"
 		},
 		{
-			"name": "relwithdebinfo",
-			"configurePreset": "relwithdebinfo"
+			"name": "debug-verbose",
+			"displayName": "Debug Test (Verbose)",
+			"description": "Run tests with Debug build (verbose output)",
+			"inherits": "base-test",
+			"configurePreset": "debug",
+			"output": {
+				"outputOnFailure": true,
+				"verbosity": "extra"
+			}
+		},
+		{
+			"name": "release-verbose",
+			"displayName": "Release Test (Verbose)",
+			"description": "Run tests with Release build (verbose output)",
+			"inherits": "base-test",
+			"configurePreset": "release",
+			"output": {
+				"outputOnFailure": true,
+				"verbosity": "extra"
+			}
 		}
 	]
 }

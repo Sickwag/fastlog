@@ -113,6 +113,9 @@ int main() {
 }
 ```
 
+运行example中的最小化演示：
+![basic demo](/images/demo.png)
+
 ### 2️⃣ 文件日志
 
 ```cpp
